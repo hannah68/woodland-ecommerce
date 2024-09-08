@@ -1,12 +1,17 @@
+import { fetchProducts } from "@/lib/products";
 import Image from "next/image";
+import { ProductItem } from "./components/ProductItem";
 
-export default function Home() {
+export default async function Home() {
+	const products = await fetchProducts();
+	const featuredProducts = products.filter((product) => product.feature);
+
 	return (
 		<div>
 			<section className="flex h-40rem w-full">
-				<div className="w-1/2 bg-gray-200 ">
-					<div className="w-40rem flex flex-col gap-6 justify-center my-12 mx-auto pl-12">
-						<h1 className="text-5xl">
+				<div className="w-1/2 bg-gray-200 flex items-center justify-center">
+					<div className="w-[40rem] flex flex-col gap-6">
+						<h1 className="text-5xl font-bold">
 							The unique furniture for your special house
 						</h1>
 						<p>Shop Now</p>
@@ -26,7 +31,14 @@ export default function Home() {
 				</div>
 			</section>
 
-			{/* <FeatureSection featuredItems={featuredItems} /> */}
+			<section className="h-[40vh] flex flex-col mt-20">
+				<h2 className="text-2xl text-center mb-16">Best selling furniture</h2>
+				<div className="w-[114rem] grid grid-cols-4 grid-rows-1 justify-center items-center gap-[15rem] mx-auto">
+					{featuredProducts.map((item, idx) => {
+						return <ProductItem key={idx} item={item} />;
+					})}
+				</div>
+			</section>
 		</div>
 	);
 }

@@ -16,6 +16,7 @@ const config: Config = {
 			extend: {
 				width: {
 					"40rem": "40rem",
+					"30rem": "30rem",
 					"17rem": "17rem",
 				},
 				height: {
